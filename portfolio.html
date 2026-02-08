@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoFluff Creatives™ — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Playfair+Display:wght@400;600;700;900&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Anton&family=Syne:wght@400;500;600;700;800&family=Climate+Crisis&family=Rubik+Glitch&family=Rubik+Wet+Paint&family=Nabla&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Clash Display';
+  src: url('https://fonts.cdnfonts.com/css/clash-display') format('woff2');
+}
+
+:root {
+  --void: #000;
+  --white: #fff;
+  --signal: #CDFF50;
+  --action: #FF7A2E;
+  --bone: #E8E8E2;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { 
+  font-family: 'DM Sans', sans-serif; 
+  background: var(--void); 
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+::selection { background: var(--signal); color: var(--void); }
+
+/* Cursor follower */
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--signal);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s, width 0.2s, height 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor.hover {
+  width: 60px;
+  height: 60px;
+  border-color: var(--action);
+}
+
+/* Loading screen */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--void);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeOut 0.5s 2s forwards;
+}
+@keyframes fadeOut {
+  to { opacity: 0; pointer-events: none; }
+}
+.loader-text {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(24px, 5vw, 48px);
+  letter-spacing: -2px;
+  overflow: hidden;
+}
+.loader-text span {
+  display: inline-block;
+  animation: slideUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(100%);
+}
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.loader-text span:nth-child(1) { animation-delay: 0.1s; }
+.loader-text span:nth-child(2) { animation-delay: 0.15s; color: var(--signal); }
+.loader-text span:nth-child(3) { animation-delay: 0.2s; }
+.loader-bar {
+  width: 200px;
+  height: 2px;
+  background: #111;
+  position: relative;
+  overflow: hidden;
+}
+.loader-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--signal);
+  animation: load 1.5s ease forwards;
+}
+@keyframes load {
+  to { width: 100%; }
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  mix-blend-mode: difference;
+}
+.nav-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px;
+  letter-spacing: -0.5px;
+  color: var(--white);
+}
+.nav-logo span { color: var(--signal); }
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+.nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--signal);
+  transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* Hero */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-content {
+  text-align: center;
+  z-index: 2;
+}
+.hero-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeIn 0.5s 2.2s forwards;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+.hero h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(48px, 12vw, 180px);
+  letter-spacing: -8px;
+  line-height: 0.9;
+  opacity: 0;
+  animation: fadeIn 0.5s 2.4s forwards;
+}
+.hero h1 .outline {
+  -webkit-text-stroke: 1px var(--white);
+  color: transparent;
+}
+.hero-sub {
+  font-size: 18px;
+  color: #666;
+  margin-top: 32px;
+  opacity: 0;
+  animation: fadeIn 0.5s 2.6s forwards;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeIn 0.5s 2.8s forwards;
+}
+.hero-scroll span {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #444;
+}
+.hero-scroll .line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--signal), transparent);
+  animation: scrollPulse 2s infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.5; transform: scaleY(0.8); }
+}
+
+/* Floating elements */
+.float-el {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.1;
+}
+.float-el.circle {
+  width: 400px;
+  height: 400px;
+  border: 1px solid var(--signal);
+  border-radius: 50%;
+  top: 20%;
+  right: 10%;
+  animation: float 20s infinite linear;
+}
+.float-el.grid {
+  width: 300px;
+  height: 300px;
+  background-image: 
+    linear-gradient(to right, #222 1px, transparent 1px),
+    linear-gradient(to bottom, #222 1px, transparent 1px);
+  background-size: 20px 20px;
+  bottom: 10%;
+  left: 5%;
+  animation: float 25s infinite linear reverse;
+}
+@keyframes float {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Section headers */
+.section-header {
+  padding: 120px 48px 60px;
+  position: relative;
+}
+.section-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(100px, 20vw, 300px);
+  color: #0a0a0a;
+  position: absolute;
+  top: 50%;
+  left: 48px;
+  transform: translateY(-50%);
+  line-height: 1;
+  z-index: 0;
+}
+.section-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal);
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BRAND 1: KNOCKOUT BOXING
+   Brutal. Raw. Powerful.
+   ═══════════════════════════════════════════════════════════════ */
+.brand-knockout {
+  min-height: 100vh;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.brand-knockout::before {
+  content: 'KO';
+  font-family: 'Anton', sans-serif;
+  font-size: 60vw;
+  color: #0a0a0a;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+  pointer-events: none;
+}
+.knockout-left {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.knockout-logo {
+  margin-bottom: 60px;
+}
+.knockout-logo .main {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(60px, 10vw, 120px);
+  line-height: 0.85;
+  letter-spacing: -4px;
+  text-transform: uppercase;
+}
+.knockout-logo .main .strike {
+  position: relative;
+  display: inline-block;
+}
+.knockout-logo .main .strike::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  width: 110%;
+  height: 8px;
+  background: #ff0033;
+  transform: rotate(-3deg);
+  animation: strikeIn 0.5s ease forwards;
+}
+@keyframes strikeIn {
+  from { transform: scaleX(0) rotate(-3deg); transform-origin: left; }
+  to { transform: scaleX(1) rotate(-3deg); }
+}
+.knockout-logo .sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 8px;
+  color: #ff0033;
+  margin-top: 16px;
+}
+.knockout-info h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.knockout-info p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #888;
+  max-width: 400px;
+}
+.knockout-palette {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+}
+.knockout-palette .swatch {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.knockout-palette .swatch:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+.knockout-palette .swatch::after {
+  content: attr(data-hex);
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: #444;
+  white-space: nowrap;
+}
+.knockout-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.knockout-mockup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.knockout-glove {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 
+    0 0 0 1px #222,
+    0 0 100px rgba(255, 0, 51, 0.2);
+  animation: breathe 4s infinite;
+}
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+.knockout-glove::before {
+  content: 'KO';
+  font-family: 'Anton', sans-serif;
+  font-size: 80px;
+  color: #ff0033;
+  text-shadow: 0 0 60px rgba(255, 0, 51, 0.5);
+}
+.knockout-badge {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: #ff0033;
+  color: #000;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  transform: rotate(3deg);
+}
+.knockout-collateral {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  gap: 16px;
+}
+.knockout-collateral .item {
+  width: 80px;
+  height: 100px;
+  background: #111;
+  border: 1px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Anton', sans-serif;
+  font-size: 12px;
+  color: #ff0033;
+  transition: transform 0.2s;
+}
+.knockout-collateral .item:hover {
+  transform: translateY(-8px);
+  border-color: #ff0033;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BRAND 2: VOID COFFEE ROASTERS
+   Minimal. Mysterious. Cult-like.
+   ═══════════════════════════════════════════════════════════════ */
+.brand-void {
+  min-height: 100vh;
+  background: #f5f0e8;
+  color: #000;
+  position: relative;
+  overflow: hidden;
+}
+.void-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+.void-left {
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.void-logo-wrap {
+  text-align: center;
+}
+.void-circle {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px;
+  position: relative;
+  animation: voidRotate 30s linear infinite;
+}
+@keyframes voidRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.void-circle::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #f5f0e8;
+  border-radius: 50%;
+  top: -4px;
+}
+.void-circle-inner {
+  width: 150px;
+  height: 150px;
+  background: #0a0a0a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: voidRotate 30s linear infinite reverse;
+}
+.void-mark {
+  font-family: 'Instrument Serif', serif;
+  font-size: 48px;
+  font-style: italic;
+  color: #f5f0e8;
+}
+.void-wordmark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 12px;
+  text-transform: uppercase;
+  color: #666;
+}
+.void-right {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.void-headline {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1.1;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+.void-desc {
+  font-size: 15px;
+  line-height: 2;
+  color: #666;
+  max-width: 400px;
+  margin-bottom: 48px;
+}
+.void-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.void-detail {
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+}
+.void-detail .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 8px;
+}
+.void-detail .value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+.void-palette {
+  display: flex;
+  gap: 0;
+  margin-top: 48px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.void-palette .swatch {
+  flex: 1;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  transition: flex 0.3s;
+}
+.void-palette .swatch:hover {
+  flex: 2;
+}
+.void-badge {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  background: #f5f0e8;
+  color: #000;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BRAND 3: STATIC INK TATTOO
+   Glitchy. Raw. Subcultural.
+   ═══════════════════════════════════════════════════════════════ */
+.brand-static {
+  min-height: 100vh;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.static-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+.static-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.static-logo {
+  position: relative;
+  display: inline-block;
+}
+.static-logo .main {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(60px, 15vw, 200px);
+  letter-spacing: -8px;
+  text-transform: uppercase;
+  position: relative;
+  animation: glitch 3s infinite;
+}
+@keyframes glitch {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-4px, 2px); }
+  94% { transform: translate(4px, -2px); }
+  96% { transform: translate(-2px, -4px); }
+  98% { transform: translate(2px, 4px); }
+}
+.static-logo .main::before,
+.static-logo .main::after {
+  content: 'STATIC';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.static-logo .main::before {
+  color: #0ff;
+  animation: glitchColor 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+.static-logo .main::after {
+  color: #f0f;
+  animation: glitchColor 3s infinite reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+@keyframes glitchColor {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(3px, 0); }
+  94% { transform: translate(-3px, 0); }
+  96% { transform: translate(2px, 0); }
+  98% { transform: translate(-2px, 0); }
+}
+.static-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 20px;
+  color: #666;
+  margin-top: 16px;
+  text-transform: uppercase;
+}
+.static-info {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+}
+.static-info-item {
+  text-align: left;
+}
+.static-info-item .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #444;
+  margin-bottom: 8px;
+}
+.static-info-item .value {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+.static-palette {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 48px;
+}
+.static-palette .swatch {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #333;
+  position: relative;
+  transition: all 0.2s;
+}
+.static-palette .swatch:hover {
+  transform: rotate(45deg) scale(1.2);
+  border-color: #fff;
+}
+.static-badge {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  border: 1px solid #333;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  padding: 12px 20px;
+  animation: borderPulse 2s infinite;
+}
+@keyframes borderPulse {
+  0%, 100% { border-color: #333; }
+  50% { border-color: #666; }
+}
+.static-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.1) 2px,
+    rgba(0,0,0,0.1) 4px
+  );
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BRAND 4: SPARKHOUSE CLEANING
+   Unexpected. Playful. Premium.
+   ═══════════════════════════════════════════════════════════════ */
+.brand-spark {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.spark-left {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+}
+.spark-logo {
+  margin-bottom: 48px;
+}
+.spark-logo .icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+  display: inline-block;
+  animation: sparkle 2s infinite;
+}
+@keyframes sparkle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(10deg) scale(1.1); }
+  75% { transform: rotate(-10deg) scale(1.1); }
+}
+.spark-logo .main {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 72px);
+  letter-spacing: -3px;
+  line-height: 1;
+}
+.spark-logo .main .house {
+  display: block;
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+}
+.spark-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-top: 16px;
+}
+.spark-desc {
+  font-size: 16px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.8);
+  max-width: 400px;
+}
+.spark-palette {
+  display: flex;
+  gap: 12px;
+  margin-top: 48px;
+}
+.spark-palette .swatch {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.2);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.spark-palette .swatch:hover {
+  transform: scale(1.2);
+  border-color: #fff;
+}
+.spark-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.spark-mockups {
+  position: relative;
+  width: 400px;
+  height: 500px;
+}
+.spark-card {
+  position: absolute;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+.spark-card:nth-child(1) {
+  width: 200px;
+  top: 0;
+  left: 0;
+  transform: rotate(-8deg);
+}
+.spark-card:nth-child(1):hover { transform: rotate(-8deg) scale(1.05); }
+.spark-card:nth-child(2) {
+  width: 220px;
+  top: 60px;
+  right: 0;
+  transform: rotate(5deg);
+}
+.spark-card:nth-child(2):hover { transform: rotate(5deg) scale(1.05); }
+.spark-card:nth-child(3) {
+  width: 260px;
+  bottom: 0;
+  left: 40px;
+  transform: rotate(-3deg);
+}
+.spark-card:nth-child(3):hover { transform: rotate(-3deg) scale(1.05); }
+.spark-card-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #667eea;
+  margin-bottom: 8px;
+}
+.spark-card-text {
+  font-size: 11px;
+  color: #999;
+}
+.spark-badge {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: #fff;
+  color: #667eea;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-radius: 100px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BRAND 5: VOLT ELECTRICAL
+   Technical. Futuristic. Precise.
+   ═══════════════════════════════════════════════════════════════ */
+.brand-volt {
+  min-height: 100vh;
+  background: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+}
+.volt-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, #111 1px, transparent 1px),
+    linear-gradient(to bottom, #111 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+}
+.volt-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+.volt-left {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid #1a1a1a;
+}
+.volt-logo {
+  margin-bottom: 48px;
+}
+.volt-logo .mark {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #ffcc00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+.volt-logo .mark::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  background: #ffcc00;
+  clip-path: polygon(50% 0%, 100% 50%, 60% 50%, 60% 100%, 0% 50%, 40% 50%);
+}
+.volt-logo .mark::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid #333;
+}
+.volt-logo .wordmark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -2px;
+}
+.volt-logo .sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 6px;
+  color: #ffcc00;
+  margin-top: 8px;
+}
+.volt-desc {
+  font-size: 14px;
+  line-height: 2;
+  color: #666;
+  max-width: 400px;
+}
+.volt-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.volt-spec {
+  border: 1px solid #1a1a1a;
+  padding: 20px;
+}
+.volt-spec .num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffcc00;
+  margin-bottom: 4px;
+}
+.volt-spec .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #444;
+}
+.volt-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.volt-display {
+  width: 300px;
+  height: 400px;
+  border: 1px solid #222;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.volt-display::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #1a1a1a;
+}
+.volt-bolt {
+  width: 120px;
+  height: 200px;
+  background: #ffcc00;
+  clip-path: polygon(50% 0%, 100% 50%, 60% 50%, 60% 100%, 0% 50%, 40% 50%);
+  animation: voltPulse 2s infinite;
+}
+@keyframes voltPulse {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(255,204,0,0.3)); }
+  50% { filter: drop-shadow(0 0 40px rgba(255,204,0,0.6)); }
+}
+.volt-badge {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  border: 1px solid #ffcc00;
+  color: #ffcc00;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+}
+.volt-coords {
+  position: absolute;
+  bottom: 40px;
+  left: 60px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #333;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BRAND 6: MISFITS FOOD TRUCK
+   Street. Bold. Unapologetic.
+   ═══════════════════════════════════════════════════════════════ */
+.brand-misfits {
+  min-height: 100vh;
+  background: #ff6b35;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.misfits-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.misfits-logo {
+  margin-bottom: 48px;
+}
+.misfits-logo .main {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(60px, 15vw, 180px);
+  letter-spacing: -8px;
+  color: #000;
+  text-transform: uppercase;
+  line-height: 0.9;
+  position: relative;
+}
+.misfits-logo .main::before {
+  content: 'MISFITS';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
+  z-index: -1;
+}
+.misfits-logo .sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 16px;
+  color: #000;
+  background: #fff;
+  display: inline-block;
+  padding: 12px 24px;
+  margin-top: 16px;
+}
+.misfits-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #000;
+  max-width: 500px;
+  margin: 0 auto 48px;
+  opacity: 0.7;
+}
+.misfits-items {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.misfits-item {
+  background: #000;
+  color: #fff;
+  padding: 16px 32px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: transform 0.2s;
+}
+.misfits-item:hover {
+  transform: rotate(-3deg) scale(1.05);
+}
+.misfits-palette {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.misfits-palette .swatch {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #000;
+  transition: transform 0.2s;
+}
+.misfits-palette .swatch:hover {
+  transform: rotate(10deg);
+}
+.misfits-badge {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: #000;
+  color: #ff6b35;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 12px 20px;
+  transform: rotate(5deg);
+}
+.misfits-stickers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.misfits-sticker {
+  position: absolute;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px;
+  background: #fff;
+  padding: 8px 16px;
+  color: #000;
+}
+.misfits-sticker:nth-child(1) { top: 15%; left: 10%; transform: rotate(-15deg); }
+.misfits-sticker:nth-child(2) { top: 25%; right: 8%; transform: rotate(10deg); }
+.misfits-sticker:nth-child(3) { bottom: 20%; left: 15%; transform: rotate(8deg); }
+.misfits-sticker:nth-child(4) { bottom: 30%; right: 12%; transform: rotate(-5deg); }
+
+/* CTA Section */
+.cta {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta::before {
+  content: 'YOUR BRAND NEXT';
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 15vw;
+  color: #0a0a0a;
+  position: absolute;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+.cta-content {
+  position: relative;
+  z-index: 2;
+}
+.cta h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(36px, 6vw, 72px);
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+}
+.cta p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 32px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--action);
+  color: #000;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 20px 40px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.cta-btn:hover {
+  background: var(--signal);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(205,255,80,0.2);
+}
+
+/* Footer */
+.footer {
+  padding: 60px 48px;
+  border-top: 1px solid #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px;
+}
+.footer-logo span { color: var(--signal); }
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .brand-knockout,
+  .void-container,
+  .spark-left,
+  .volt-container {
+    grid-template-columns: 1fr;
+  }
+  .knockout-right,
+  .void-left,
+  .spark-right,
+  .volt-right {
+    min-height: 50vh;
+  }
+  .nav { padding: 24px; }
+  .nav-links { display: none; }
+}
+@media (max-width: 768px) {
+  .static-info { flex-direction: column; gap: 32px; }
+  .misfits-items { flex-direction: column; align-items: center; }
+  .volt-specs { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- Loader -->
+<div class="loader">
+  <div class="loader-text">
+    <span>NO</span><span>FLUFF</span><span> CREATIVES</span>
+  </div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-logo">NO<span>FLUFF</span> CREATIVES™</div>
+  <div class="nav-links">
+    <a href="#knockout">01</a>
+    <a href="#void">02</a>
+    <a href="#static">03</a>
+    <a href="#spark">04</a>
+    <a href="#volt">05</a>
+    <a href="#misfits">06</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="float-el circle"></div>
+  <div class="float-el grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Portfolio / 2026</div>
+    <h1>WE BUILD<br><span class="outline">BRANDS</span></h1>
+    <p class="hero-sub">Six identities. Six transformations. Zero fluff.</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- Section Header -->
+<div class="section-header">
+  <div class="section-num">01</div>
+  <div class="section-title">Knockout Boxing / Fitness & Combat</div>
+</div>
+
+<!-- BRAND 1: KNOCKOUT BOXING -->
+<section class="brand-knockout" id="knockout">
+  <div class="knockout-left">
+    <div class="knockout-logo">
+      <div class="main">KNOCK<span class="strike">OUT</span></div>
+      <div class="sub">Boxing & Combat Fitness</div>
+    </div>
+    <div class="knockout-info">
+      <h3>The Brief</h3>
+      <p>Marcus ran "Marcus's Boxing" from a warehouse gym. Great trainers, loyal members, zero brand presence. We gave him an identity as powerful as the uppercuts he throws.</p>
+    </div>
+    <div class="knockout-palette">
+      <div class="swatch" style="background:#000" data-hex="#000000"></div>
+      <div class="swatch" style="background:#ff0033" data-hex="#FF0033"></div>
+      <div class="swatch" style="background:#1a1a1a" data-hex="#1A1A1A"></div>
+      <div class="swatch" style="background:#fff" data-hex="#FFFFFF"></div>
+    </div>
+  </div>
+  <div class="knockout-right">
+    <div class="knockout-badge">BRAND KIT — $449</div>
+    <div class="knockout-mockup">
+      <div class="knockout-glove"></div>
+    </div>
+    <div class="knockout-collateral">
+      <div class="item">KO</div>
+      <div class="item">KO</div>
+      <div class="item">KO</div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Header -->
+<div class="section-header">
+  <div class="section-num">02</div>
+  <div class="section-title">Void Coffee / Specialty Roasters</div>
+</div>
+
+<!-- BRAND 2: VOID COFFEE -->
+<section class="brand-void" id="void">
+  <div class="void-container">
+    <div class="void-left">
+      <div class="void-badge">FULL IDENTITY — $949</div>
+      <div class="void-logo-wrap">
+        <div class="void-circle">
+          <div class="void-circle-inner">
+            <div class="void-mark">V</div>
+          </div>
+        </div>
+        <div class="void-wordmark">VOID COFFEE</div>
+      </div>
+    </div>
+    <div class="void-right">
+      <div class="void-headline">For those who take their coffee seriously.</div>
+      <p class="void-desc">Elena roasted beans from her garage and sold at farmers markets. When she opened her first café, she needed a brand that commanded $7 pour-overs. Now she has three locations.</p>
+      <div class="void-details">
+        <div class="void-detail">
+          <div class="label">Typography</div>
+          <div class="value">Instrument Serif + Space Grotesk</div>
+        </div>
+        <div class="void-detail">
+          <div class="label">Industry</div>
+          <div class="value">Specialty Coffee</div>
+        </div>
+        <div class="void-detail">
+          <div class="label">Deliverables</div>
+          <div class="value">Logo, Packaging, Menu, Signage</div>
+        </div>
+        <div class="void-detail">
+          <div class="label">Timeline</div>
+          <div class="value">7 Days</div>
+        </div>
+      </div>
+      <div class="void-palette">
+        <div class="swatch" style="background:#0a0a0a;color:#f5f0e8">#0A0A0A</div>
+        <div class="swatch" style="background:#f5f0e8;color:#0a0a0a">#F5F0E8</div>
+        <div class="swatch" style="background:#8b7355;color:#fff">#8B7355</div>
+        <div class="swatch" style="background:#c9a87c;color:#000">#C9A87C</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Header -->
+<div class="section-header">
+  <div class="section-num">03</div>
+  <div class="section-title">Static Ink / Tattoo Studio</div>
+</div>
+
+<!-- BRAND 3: STATIC INK -->
+<section class="brand-static" id="static">
+  <div class="static-noise"></div>
+  <div class="static-scanlines"></div>
+  <div class="static-badge">BRAND KIT — $449</div>
+  <div class="static-content">
+    <div class="static-logo">
+      <div class="main">STATIC</div>
+      <div class="sub">Tattoo & Piercing</div>
+    </div>
+    <div class="static-info">
+      <div class="static-info-item">
+        <div class="label">Style</div>
+        <div class="value">Glitch / Brutalist</div>
+      </div>
+      <div class="static-info-item">
+        <div class="label">Fonts</div>
+        <div class="value">Syne / Space Mono</div>
+      </div>
+      <div class="static-info-item">
+        <div class="label">Mood</div>
+        <div class="value">Raw / Underground</div>
+      </div>
+    </div>
+    <div class="static-palette">
+      <div class="swatch" style="background:#000"></div>
+      <div class="swatch" style="background:#fff"></div>
+      <div class="swatch" style="background:#0ff"></div>
+      <div class="swatch" style="background:#f0f"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Header -->
+<div class="section-header">
+  <div class="section-num">04</div>
+  <div class="section-title">Sparkhouse / Cleaning Services</div>
+</div>
+
+<!-- BRAND 4: SPARKHOUSE -->
+<section class="brand-spark" id="spark">
+  <div class="spark-badge">FULL IDENTITY — $949</div>
+  <div class="spark-left">
+    <div class="spark-logo">
+      <div class="icon">✨</div>
+      <div class="main">SPARK<span class="house">HOUSE</span></div>
+      <div class="spark-tag">Premium Home Cleaning</div>
+    </div>
+    <p class="spark-desc">Who said cleaning companies have to look boring? Jennifer turned her "maid service" into a premium brand that charges 2x the competition. Her secret? Looking like she's worth it.</p>
+    <div class="spark-palette">
+      <div class="swatch" style="background:#667eea"></div>
+      <div class="swatch" style="background:#764ba2"></div>
+      <div class="swatch" style="background:#f093fb"></div>
+      <div class="swatch" style="background:#fff"></div>
+    </div>
+  </div>
+  <div class="spark-right">
+    <div class="spark-mockups">
+      <div class="spark-card">
+        <div class="spark-card-logo">✨ Sparkhouse</div>
+        <div class="spark-card-text">Jennifer Martinez<br>Owner & Lead Specialist</div>
+      </div>
+      <div class="spark-card">
+        <div class="spark-card-logo">✨ Sparkhouse</div>
+        <div class="spark-card-text">Premium Deep Clean<br>Starting at $249</div>
+      </div>
+      <div class="spark-card">
+        <div class="spark-card-logo">✨ Sparkhouse</div>
+        <div class="spark-card-text">"Best cleaning service we've ever used."<br>— The Hendersons</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Header -->
+<div class="section-header">
+  <div class="section-num">05</div>
+  <div class="section-title">Volt Electrical / Trade Services</div>
+</div>
+
+<!-- BRAND 5: VOLT ELECTRICAL -->
+<section class="brand-volt" id="volt">
+  <div class="volt-grid-bg"></div>
+  <div class="volt-badge">BRAND KIT — $449</div>
+  <div class="volt-container">
+    <div class="volt-left">
+      <div class="volt-logo">
+        <div class="mark"></div>
+        <div class="wordmark">VOLT</div>
+        <div class="sub">Electrical Services</div>
+      </div>
+      <p class="volt-desc">Tom's business was "Tom's Electric" — clip art lightning bolt, Comic Sans on the truck. We built him a brand that screams precision, safety, and professionalism. Now he bids on commercial contracts.</p>
+      <div class="volt-specs">
+        <div class="volt-spec">
+          <div class="num">24/7</div>
+          <div class="label">Emergency Service</div>
+        </div>
+        <div class="volt-spec">
+          <div class="num">15+</div>
+          <div class="label">Years Experience</div>
+        </div>
+        <div class="volt-spec">
+          <div class="num">100%</div>
+          <div class="label">Licensed & Insured</div>
+        </div>
+      </div>
+      <div class="volt-coords">40.7128° N, 74.0060° W</div>
+    </div>
+    <div class="volt-right">
+      <div class="volt-display">
+        <div class="volt-bolt"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Header -->
+<div class="section-header">
+  <div class="section-num">06</div>
+  <div class="section-title">Misfits / Food Truck</div>
+</div>
+
+<!-- BRAND 6: MISFITS FOOD TRUCK -->
+<section class="brand-misfits" id="misfits">
+  <div class="misfits-badge">STARTER — $179</div>
+  <div class="misfits-stickers">
+    <div class="misfits-sticker">EAT LOCAL</div>
+    <div class="misfits-sticker">NO RULES</div>
+    <div class="misfits-sticker">STREET FOOD</div>
+    <div class="misfits-sticker">CASH ONLY</div>
+  </div>
+  <div class="misfits-content">
+    <div class="misfits-logo">
+      <div class="main">MISFITS</div>
+      <div class="sub">Food Truck</div>
+    </div>
+    <p class="misfits-desc">Diego quit his restaurant job to start a food truck. He had the recipes, the hustle, the Instagram following. He just needed a brand as bold as his birria tacos.</p>
+    <div class="misfits-items">
+      <div class="misfits-item">Birria Tacos</div>
+      <div class="misfits-item">Loaded Fries</div>
+      <div class="misfits-item">Street Corn</div>
+    </div>
+    <div class="misfits-palette">
+      <div class="swatch" style="background:#ff6b35"></div>
+      <div class="swatch" style="background:#000"></div>
+      <div class="swatch" style="background:#fff"></div>
+      <div class="swatch" style="background:#ffd23f"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-content">
+    <h2>Your brand next?</h2>
+    <p>Free preview in 48 hours. Pay only if you love it.</p>
+    <a href="#" class="cta-btn">Start Your Brand →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-logo">NO<span>FLUFF</span> CREATIVES™</div>
+  <div class="footer-copy">© 2026 — ALL BRAND. NO BS.</div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+let mouseX = 0, mouseY = 0;
+let cursorX = 0, cursorY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animate() {
+  cursorX += (mouseX - cursorX) * 0.1;
+  cursorY += (mouseY - cursorY) * 0.1;
+  cursor.style.left = cursorX - 10 + 'px';
+  cursor.style.top = cursorY - 10 + 'px';
+  requestAnimationFrame(animate);
+}
+animate();
+
+// Hover effect
+document.querySelectorAll('a, button, .swatch, .spark-card, .knockout-collateral .item, .misfits-item').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section-header, .brand-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(40px)';
+  el.style.transition = 'all 0.8s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
