@@ -97,13 +97,13 @@ h3{font-size:clamp(20px,2.5vw,28px)}
 .nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:16px 0;transition:all .3s}
 .nav.scrolled{background:rgba(8,8,10,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-inner{display:flex;justify-content:space-between;align-items:center}
-.nav-logo{font-family:'Archivo Black',sans-serif;font-size:16px;letter-spacing:-0.5px;display:flex;align-items:center;gap:2px}
+.nav-logo{font-family:'Archivo Black',sans-serif;font-size:22px;letter-spacing:-0.5px;display:flex;align-items:flex-start;gap:2px}
 .nav-logo span{color:var(--signal)}
-.nav-logo sup{font-size:7px;opacity:.4;vertical-align:super}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-links a{font-size:13px;font-weight:500;color:var(--mid);transition:.2s}
+.nav-logo sup{font-size:9px;opacity:.5;vertical-align:top;margin-top:2px;margin-left:1px}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:15px;font-weight:500;color:var(--mid);transition:.2s}
 .nav-links a:hover{color:var(--bone)}
-.nav-cta{background:var(--action);color:var(--void);padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600}
+.nav-cta{background:var(--action);color:var(--void);padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600}
 .nav-cta:hover{box-shadow:0 4px 16px rgba(255,122,46,.3)}
 
 /* Mobile nav */
@@ -163,17 +163,17 @@ h3{font-size:clamp(20px,2.5vw,28px)}
 .problem-list li{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);color:var(--mid)}
 .problem-list li:last-child{border-bottom:none}
 .problem-list .x{color:#ff4444;font-weight:700;font-size:16px}
-.problem-visual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.problem-card{background:var(--void);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center}
+.problem-visual{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.problem-card{background:var(--void);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center}
 .problem-card.bad{border-color:#ff4444;border-style:dashed}
 .problem-card.good{border-color:var(--signal)}
-.problem-card .label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.problem-card .label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
 .problem-card.bad .label{color:#ff4444}
 .problem-card.good .label{color:var(--signal)}
-.problem-card .price{font-family:'Archivo Black',sans-serif;font-size:28px;margin-bottom:8px}
+.problem-card .price{font-family:'Archivo Black',sans-serif;font-size:36px;margin-bottom:12px}
 .problem-card.bad .price{color:#ff4444;text-decoration:line-through;opacity:.6}
 .problem-card.good .price{color:var(--signal)}
-.problem-card .desc{font-size:12px;color:var(--dim)}
+.problem-card .desc{font-size:14px;color:var(--dim);line-height:1.6}
 
 /* ═══════════════════════════════════════════════════════════════
    SOLUTION/SERVICES SECTION
@@ -187,9 +187,13 @@ h3{font-size:clamp(20px,2.5vw,28px)}
 .service-card:hover{border-color:var(--signal);transform:translateY(-4px)}
 .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient);opacity:0;transition:.3s}
 .service-card:hover::before{opacity:1}
-.service-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:24px;background:var(--signal-dim);border:1px solid rgba(205,255,80,.15)}
+.service-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;background:var(--signal-dim);border:1px solid rgba(205,255,80,.15)}
+.service-icon svg{width:32px;height:32px}
+.service-card:nth-child(1) .service-icon svg{stroke:var(--signal)}
 .service-card:nth-child(2) .service-icon{background:var(--action-dim);border-color:rgba(255,122,46,.15)}
+.service-card:nth-child(2) .service-icon svg{stroke:var(--action)}
 .service-card:nth-child(3) .service-icon{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
+.service-card:nth-child(3) .service-icon svg{stroke:var(--bone)}
 .service-card h3{font-size:20px;margin-bottom:12px}
 .service-card p{color:var(--mid);font-size:14px;line-height:1.7;margin-bottom:20px}
 .service-list{list-style:none}
@@ -597,7 +601,7 @@ h3{font-size:clamp(20px,2.5vw,28px)}
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon">✦</div>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
         <h3>Logo Design</h3>
         <p>A custom logo built specifically for your business — not a template with your name slapped on it. Multiple concepts, unlimited revisions until you love it.</p>
         <ul class="service-list">
@@ -609,7 +613,7 @@ h3{font-size:clamp(20px,2.5vw,28px)}
         </ul>
       </div>
       <div class="service-card">
-        <div class="service-icon">◆</div>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <h3>Brand Identity</h3>
         <p>Your complete visual system — colors, fonts, rules for how to use them. So your brand looks consistent everywhere, from your truck to your website.</p>
         <ul class="service-list">
@@ -621,7 +625,7 @@ h3{font-size:clamp(20px,2.5vw,28px)}
         </ul>
       </div>
       <div class="service-card">
-        <div class="service-icon">▢</div>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
         <h3>Brand Collateral</h3>
         <p>All the touchpoints that make you look legit — business cards, social media, email signatures. The stuff that turns a logo into a real brand.</p>
         <ul class="service-list">
@@ -1122,7 +1126,7 @@ h3{font-size:clamp(20px,2.5vw,28px)}
       </div>
       <div class="footer-links">
         <h5>Contact</h5>
-        <a href="mailto:hello@nofluffcreatives.com">hello@nofluffcreatives.com</a>
+        <a href="/cdn-cgi/l/email-protection#5139343d3d3e113f3e373d2437373223343025382734227f323e3c"><span class="__cf_email__" data-cfemail="056d6069696a456b6a636970636366776064716c7360762b666a68">[email&#160;protected]</span></a>
         <a href="#start">Brand Intake Form</a>
       </div>
     </div>
@@ -1139,7 +1143,7 @@ h3{font-size:clamp(20px,2.5vw,28px)}
 <!-- ═══════════════════════════════════════════════════════════════
      SCRIPTS
      ═══════════════════════════════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Nav scroll effect
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
@@ -1201,15 +1205,4 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "NoFluff Creatives",
-  "description": "Affordable brand identity for small businesses. Logo design, branding packages, visual identity.",
-  "url": "https://nofluffcreatives.com",
-  "email": "hello@nofluffcreatives.com",
-  "priceRange": "$179-$949",
-  "areaServed": "United States",
-  "serviceType": ["Logo Design", "Brand Identity", "Graphic Design"]
-}
-</script>
-
-</body>
-</html>
-
+  "description": "Affordable brand identity for small businesses. Logo design, branding packages, visu
